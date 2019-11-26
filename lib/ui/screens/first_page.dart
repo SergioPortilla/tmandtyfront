@@ -1,6 +1,8 @@
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_signin_button/button_list.dart';
+import 'package:flutter_signin_button/button_view.dart';
 import 'package:tmandtyfront/delayed_animation.dart';
 import 'package:tmandtyfront/main.dart';
 import 'package:tmandtyfront/styles/styles.dart';
@@ -107,6 +109,31 @@ class MyAppState extends State<MyApp2> with SingleTickerProviderStateMixin {
                             delayment: 5000,
                             styles: TextStyle(
                               fontSize: 15.0, color: Colors.black54
+                            )
+                          ),
+                          DelayedAimation(
+                            delay: delayedAmount + 4000,
+                            child: Row(
+                              children: [
+                                SizedBox(width: 50.0),
+                                SignInButton(
+                                  Buttons.Facebook,
+                                  mini: true,
+                                  onPressed: () {},
+                                ),
+                                SizedBox(width: 20.0),
+                                SignInButton(
+                                  Buttons.GoogleDark,
+                                  mini: true,
+                                  onPressed: () {},
+                                ),
+                                SizedBox(width: 20.0),
+                                SignInButton(
+                                  Buttons.Twitter,
+                                  mini: true,
+                                  onPressed: () {},
+                                )
+                              ],
                             )
                           ),
                           SizedBox(height: 50.0),
