@@ -1,9 +1,8 @@
 import 'dart:math';
 
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:tmandtyfront/styles/styles.dart';
+import 'package:tmandtyfront/config/validator.dart';
 
 class BottomNavBar extends StatefulWidget {
   @override
@@ -21,36 +20,164 @@ class _BottomNavBarState extends State<BottomNavBar> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        bottomNavigationBar: CurvedNavigationBar(
-          key: _bottomNavigationKey,
-          index: 0,
-          height: 50.0,
-          items: <Widget>[
-            Icon(Icons.person , size: 30, color: Colors.white),
-            Icon(Icons.image, size: 30, color: Colors.white),
-            Icon(Icons.payment , size: 30, color: Colors.white),
-            Icon(Icons.language , size: 30, color: Colors.white),
-            Icon(Icons.check , size: 30, color: Colors.white),
-          ],
-          color: tMandTYcolor,
-          buttonBackgroundColor: tMandTYcolor,
-          backgroundColor: Colors.white,
-          animationCurve: Curves.easeOutCubic,
-          animationDuration: Duration(milliseconds: 600),
-          onTap: (index) {
-            setState(() {
-              _page = index;
-            });
-          },
+    return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: Scaffold(
+          backgroundColor: Colors.grey[100],
+          body: Center(
+            child: SafeArea(
+              child: Container(
+                  child: Wrap(
+                    alignment: WrapAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        'Llena todos los campos para',
+                        style: TextStyle(
+                            fontSize: 22.0,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black38
+                        ),
+                      ),
+                      Text(
+                        'continuar con el registro',
+                        style: TextStyle(
+                            fontSize: 22.0,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black38
+                        ),
+                      ),
+                      Row(children: <Widget>[
+                        Expanded(
+                          child: new Container(
+                              margin: const EdgeInsets.only(left: 20.0, right: 20.0),
+                              child: Divider(
+                                color: Colors.black,
+                                height: 30.0,
+                              )),
+                        ),
+                      ]),
+                      Container(
+                          margin: const EdgeInsets.only(right: 50, left: 50),
+                          child: Wrap(
+                              alignment: WrapAlignment.center,
+                              children: [
+                                TextFormField(
+                                  decoration: InputDecoration(
+                                    labelText: 'Nombre/s',
+                                    icon: new Icon(Icons.assignment_ind),
+                                  ),
+                                ),
+                                TextFormField(
+                                  decoration: InputDecoration(
+                                    labelText: 'Apellido/s',
+                                    icon: new Icon(Icons.assignment_ind),
+                                  ),
+                                ),
+                                TextFormField(
+                                  key: Key('email'),
+                                  decoration: new InputDecoration(
+                                      labelText: 'Correo',
+                                      icon: new Icon(Icons.mail)
+                                  ),
+                                  validator: (value) {
+                                    if (value.isEmpty) {
+                                        return 'Please enter some text';
+                                      }
+                                      return null;
+                                    },
+//                                  inputType: TextInputType.emailAddress,
+//
+                                  onSaved: (String value) => _email = value,
+                                ),
+                                TextFormField(
+                                  decoration: InputDecoration(
+                                    labelText: 'Usuario',
+                                    icon: new Icon(Icons.person),
+                                  ),
+                                ),
+
+                                TextFormField(
+                                  obscureText: true,
+                                  key: Key('Contrasena'),
+                                  decoration: new InputDecoration(
+                                      labelText: 'Contraseña',
+                                      icon: new Icon(Icons.lock)
+                                  ),
+                                  onSaved: (String value) => _password = value,
+
+                                ),
+                                TextFormField(
+                                  obscureText: true,
+                                  key: Key('ContrasenaRepeat'),
+                                  decoration: new InputDecoration(
+                                      labelText: 'Verificar contraseña',
+                                      icon: new Icon(Icons.lock)
+                                  ),
+                                  cursorColor: Colors.lightBlue,
+                                  onSaved: (String value) => _password = value,
+
+                                ),
+                                SizedBox(height: 80.0),
+                                CheckboxListTile(
+                                  value: _value2,
+                                  title: new Text('Crear usuario como tutor'),
+                                  controlAffinity: ListTileControlAffinity
+                                      .leading,
+                                  subtitle: new Text(
+                                      'Los usuarios tutores deben manejar al menos 2 lenguas'),
+                                  secondary: new Icon(Icons.contact_mail),
+                                  onChanged: (bool value) {
+                                    setState(() {
+                                      _value2 = value;
+                                    });
+                                  },
+                                  activeColor: Colors.lightBlue,
+                                ),
+                                SizedBox(height: 70.0),
+                              ])
+                      ),
+
+                      Container(
+                        height: 45,
+                        width: 220,
+                        child: RaisedButton(
+                          shape: RoundedRectangleBorder( borderRadius: new BorderRadius.circular(50.0), ),
+                          padding: EdgeInsets.all(0.0),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => BottomNavBar()),
+                            );
+                          },
+                          child: Ink(
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(colors: [Colors.greenAccent, Colors.lightBlueAccent]),
+                              borderRadius: BorderRadius.all(Radius.circular(80.0)),
+                            ),
+                            child: Container(
+                              constraints: const BoxConstraints(minWidth: 88.0, minHeight: 36.0), // min sizes for Material buttons
+                              alignment: Alignment.center,
+                              child: Text(
+                                "Continuar",
+                                style: TextStyle(
+                                  fontSize: 24.0,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+
+                          ),
+
+                        ),
+                      )
+                    ],
+                  )
+              ),
+            ),
+          ),
         ),
-        body: SafeArea(
-          child: Wrap(
-            children: <Widget>[
-              _pageView(_page),
-            ],
-        )),
-    );
+      );
   }
 }
 
@@ -59,131 +186,8 @@ class EmailFieldValidator {
     return value.isEmpty ? 'Email can\'t be empty' : null;
   }
 }
-
-Container _pageView(int page) {
-  switch (page) {
-    case 0:
-      return _pageUserData();
-      break;
-
-    case 4:
-      return _pageUserImage();
-      break;
-
-    default:
-      return _pageUserImage();
-      break;
-  }
-}
 bool _value1 = false;
-bool _value2 = false;
-
-//we omitted the brackets '{}' and are using fat arrow '=>' instead, this is dart syntax
-//void _value1Changed(bool value) => setState(() => _value1 = value);
-//void _value2Changed(bool value) => setState(() => _value2 = value);
-Container _pageUserData() => Container(
-            margin: const EdgeInsets.only(right: 30, left: 30),
-            child: Wrap(
-              alignment: WrapAlignment.center,
-              children: <Widget>[
-                Text(
-                  'Crear Cuenta',
-                  style: TextStyle(
-                      fontSize: 40.0,
-                      fontWeight: FontWeight.bold,
-                      color: tMandTYcolor
-                  ),
-                ),
-                SizedBox(height: 70.0),
-                _paginador("Datos Personales"),
-                TextFormField(
-                  decoration: InputDecoration(
-                    labelText: 'Nombre/s',
-                    icon: new Icon(Icons.assignment_ind),
-                  ),
-                ),
-                TextFormField(
-                  decoration: InputDecoration(
-                    labelText: 'Apellido/s',
-                    icon: new Icon(Icons.assignment_ind),
-                  ),
-                ),
-                TextFormField(
-                  key: Key('email'),
-                  decoration: new InputDecoration(
-                      labelText: 'Correo',
-                      icon: new Icon(Icons.mail)
-                  ),
-                  validator: EmailFieldValidator.validate,
-                  onSaved: (String value) => _email = value,
-                ),
-                SizedBox(height: 100.0),
-                _paginador("Datos del aplicativo"),
-                TextFormField(
-                  decoration: InputDecoration(
-                    labelText: 'Usuario',
-                    icon: new Icon(Icons.person),
-                  ),
-                ),
-
-                Divider(
-                  color: tMandTYcolor,
-                ),
-                TextFormField(
-                  obscureText: true,
-                  key: Key('Contrasena'),
-                  decoration: new InputDecoration(
-                      labelText: 'Contraseña',
-                      icon: new Icon(Icons.lock)
-                  ),
-                  onSaved: (String value) => _password = value,
-
-                ),
-                TextFormField(
-                  obscureText: true,
-                  key: Key('ContrasenaRepeat'),
-                  decoration: new InputDecoration(
-                      labelText: 'Verificar contraseña',
-                      icon: new Icon(Icons.lock)
-                  ),
-                  onSaved: (String value) => _password = value,
-
-                ),
-                SizedBox(height: 80.0),
-                CheckboxListTile(
-                  value: _value2,
-//                  onChanged: _value2Changed,
-                  title: new Text('Crear usuario como tutor'),
-                  controlAffinity: ListTileControlAffinity.leading,
-                  subtitle: new Text('Los usuarios tutores deben manejar al menos 2 lenguas'),
-                  secondary: new Icon(Icons.contact_mail),
-                  activeColor: tMandTYcolor,
-                ),
-              ],
-            )
-        );
-
-Container _pageUserImage() => Container(
-        margin: const EdgeInsets.only(right: 30, left: 30),
-        child: Column(
-          children: <Widget>[
-            TextFormField(
-              decoration: new InputDecoration(
-                  hintText: 'otro',
-                  icon: new Icon(Icons.person)
-              ),
-            ),
-            RaisedButton(
-              child: Text('Go To Page of index 1'),
-              onPressed: () {
-                final CurvedNavigationBarState navBarState =
-                    _bottomNavigationKey.currentState;
-                navBarState.setPage(1);
-              },
-            )
-          ],
-        )
-    );
+bool _value2 = true;
 
 
 Row _paginador(String Texto) => Row(children: <Widget>[
