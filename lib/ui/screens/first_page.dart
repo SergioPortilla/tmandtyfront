@@ -45,25 +45,13 @@ class MyAppState extends State<MyApp2> with SingleTickerProviderStateMixin {
             child: Wrap(
               alignment: WrapAlignment.center,
               children: <Widget>[
-              AvatarGlow(
-                endRadius: 90,
-                duration: Duration(seconds: 2),
-                glowColor: Colors.black54,
-                repeat: true,
-                repeatPauseDuration: Duration(seconds: 2),
-                startDelay: Duration(seconds: 1),
-                child: Material(
-                  elevation: 8.0,
-                  shape: CircleBorder(),
-                  child: CircleAvatar(
-                    backgroundColor: Colors.black12,
-                    radius: 50.0,
-                    child: FlutterLogo(
-                      size: 50.0,
-                    ),
-                  )
-                ),
+              Material(
+                  child: Image.asset(
+                    'assets/images/Imagen1.png',
+                    width: 300.0,
+                  ),
               ),
+              SizedBox(height: 30.0),
               _textAnimate(
                 text: "Type Me & Teach You", delayment: 1000,
                 styles: TextStyle(
@@ -72,14 +60,14 @@ class MyAppState extends State<MyApp2> with SingleTickerProviderStateMixin {
                   color: Colors.black54
                 ),
               ),
-              SizedBox(height: 25.0,),
+              SizedBox(height: 60.0),
 
                 _textAnimate(
                     text: "Tú plataforma personal de", delayment: 2000),
                 _textAnimate(
                     text: "tutorias y acompañamiento", delayment: 2000),
                 _textAnimate(text: "en tus idiomas favoritos", delayment: 2000),
-                SizedBox(height: 40.0,),
+                SizedBox(height: 70.0,),
                 DelayedAimation(
                   delay: delayedAmount + 3000,
                   child: Container(

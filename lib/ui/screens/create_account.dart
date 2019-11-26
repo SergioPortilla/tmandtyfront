@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tmandtyfront/config/validator.dart';
+import 'package:tmandtyfront/ui/screens/image_account.dart';
 
 class BottomNavBar extends StatefulWidget {
   @override
@@ -146,7 +147,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                           onPressed: () {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => BottomNavBar()),
+                              MaterialPageRoute(builder: (context) => ImageAccount()),
                             );
                           },
                           child: Ink(
